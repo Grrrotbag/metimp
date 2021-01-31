@@ -63,7 +63,7 @@ suite("Unit Tests", function () {
 
     test("Unknown Unit Input", function (done) {
       let input = "32oi";
-      assert.equal(convertHandler.getUnit(input), "invalid input");
+      assert.equal(convertHandler.getUnit(input), "invalid unit");
       done();
     });
   });

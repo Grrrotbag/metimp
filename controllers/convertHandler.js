@@ -35,7 +35,7 @@ function ConvertHandler() {
 
     if (validUnits.includes(unit[0].toLowerCase())) return unit[0].toLowerCase();
 
-    return "invalid input";
+    return "invalid unit";
   };
 
   this.getReturnUnit = function (initUnit) {
