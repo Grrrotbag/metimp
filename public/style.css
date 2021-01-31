@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --ivory: #eaf2e3ff;
+  --middle-blue-green: #a6ede2ff;
+  --quick-silver: #aaa09cff;
+  --tart-orange: #f25757ff;
+  --sandy-brown: #f2a05dff;
+  --corn: #f2e863ff;
+  --orange-yellow-crayola: #f2cd60ff;
+  --base-font: "Inter", sans-serif;
+  --logo-font: "Monoton";
+  /* --logo-font: "MuseoModerno"; */
+  --logo-font: "Peralta";
+  /* --logo-font: "Zilla Slab Highlight"; */
+  --form-font: "Bebas Neue";
+  --mono-font: "Roboto Mono", monospace;
+}
+
+body {
+  font-family: sans-serif;
+  /* margin: 25px; */
+  color: #222;
+  /* background-color: #f5f5f5; */
+  background-color: var(--ivory);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 2em;
+}
+
+.container {
+  margin: auto;
+  /* width: 70%; */
+  text-align: center;
+}
+
+.explanation {
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 900;
+  font-family: var(--logo-font);
+  font-size: 5em;
+  text-transform: uppercase;
+  color: var(--tart-orange);
+  color: var(--orange-yellow-crayola);
+  text-shadow: 5px 5px black;
+  letter-spacing: 0.2em;
+}
+
+h2 {
+  font-family: var(--base-font);
+  color: var(--tart-orange);
+  font-size: 2em;
+}
+
+h3 {
+  font-family: var(--form-font);
+  font-size: 1.5em;
+}
+
+form {
+  margin-bottom: 25px;
+  padding: 15px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 5px;
+}
+
+input {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 19px;
+  width: 90%;
+  border: 1px solid var(--quick-silver);
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  font-family: var(--form-font);
+  font-size: 1.3em;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #e4f1fe;
+  background-color: var(--middle-blue-green);
+  border: 1px solid grey;
+  box-shadow: 2px 2px var(--quick-silver);
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #fffec4;
+  background-color: var(--corn);
+}
+
+code {
+  font-family: var(--mono-font);
+  font-size: 1em;
+  background-color: var(--ivory);
+  padding: 2px;
+}
