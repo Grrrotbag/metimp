@@ -65,6 +65,7 @@ function ConvertHandler() {
   };
 
   this.convert = function (initNum, initUnit) {
+    let result;
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
@@ -78,7 +79,9 @@ function ConvertHandler() {
       kg: 1 / lbsToKg,
     };
 
-    return initNum * conversion[initUnit];
+    result = Math.round(initNum * conversion[initUnit.toLowerCase()] * 10 ** 5) / 10 ** 5;
+    // return initNum * conversion[initUnit];
+    return result;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
