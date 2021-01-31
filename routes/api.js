@@ -22,15 +22,6 @@ module.exports = function (app) {
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
-    // if (
-    //   returnUnit === "undefined" ||
-    //   initNum === "undefined" ||
-    //   initUnit === "undefined" ||
-    //   returnUnit === "undefined"
-    // ) {
-    //   res.send("invalid input");
-    // }
-
     res.json({
       initNum: initNum,
       initUnit: initUnit,
@@ -38,5 +29,14 @@ module.exports = function (app) {
       returnUnit: returnUnit,
       string: toString,
     });
+    console.log(
+      res.json({
+        initNum: initNum,
+        initUnit: initUnit,
+        returnNum: returnNum,
+        returnUnit: returnUnit,
+        string: toString,
+      })
+    );
   });
 };
