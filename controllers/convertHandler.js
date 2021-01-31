@@ -17,19 +17,19 @@ function ConvertHandler() {
     let doubleFraction = /(?:.*(?:\b(?:\/)\b)){2}/;
 
     // check for double fractions
-    if (doubleFraction.test(number)) return "invalid input";
+    if (doubleFraction.test(number)) return "invalid number";
 
     // check the result
-    if (!eval(number)) return "invalid input";
+    if (!eval(number)) return "invalid number";
 
     // check if not a number
-    if (isNaN(parseFloat(number))) return "invalid input";
+    if (isNaN(parseFloat(number))) return "invalid number";
 
     return eval(number).toFixed(2);
   };
 
   this.getUnit = function (input) {
-    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg"];
+    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg", "GAL", "L", "MI", "KM", "LBS"];
     const pattern = /[a-zA-Z]+$/;
     let unit = input.match(pattern);
 

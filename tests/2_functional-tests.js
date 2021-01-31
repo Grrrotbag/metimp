@@ -51,7 +51,7 @@ suite("Functional Tests", function () {
           .query({ input: "3/7.2/4kg" })
           .end(function (err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.initNum, "invalid input");
+            assert.equal(res.body.initNum, "invalid number");
             done();
           });
       });
@@ -63,7 +63,7 @@ suite("Functional Tests", function () {
           .query({ input: "3/7.2/4kilomegagram" })
           .end(function (err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.initNum, "invalid input");
+            assert.equal(res.body.initNum, "invalid number");
             assert.equal(res.body.initUnit, "invalid unit");
             done();
           });
