@@ -40,7 +40,7 @@ suite("Unit Tests", function () {
 
     test("Invalid Input (double fraction)", function (done) {
       let input = "3/2/2l";
-      assert.equal(convertHandler.getNum(input), "invalid number");
+      assert.equal(convertHandler.getNum(input), null);
       done();
     });
 
@@ -63,7 +63,7 @@ suite("Unit Tests", function () {
 
     test("Unknown Unit Input", function (done) {
       let input = "32oi";
-      assert.equal(convertHandler.getUnit(input), "invalid unit");
+      assert.equal(convertHandler.getUnit(input), null);
       done();
     });
   });

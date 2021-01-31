@@ -17,13 +17,13 @@ function ConvertHandler() {
     let doubleFraction = /(?:.*(?:\b(?:\/)\b)){2}/;
 
     // check for double fractions
-    if (doubleFraction.test(number)) return "invalid number";
+    if (doubleFraction.test(number)) return null;
 
     // check the result
-    if (!eval(number)) return "invalid number";
+    if (!eval(number)) return null;
 
     // check if not a number
-    if (isNaN(parseFloat(number))) return "invalid number";
+    if (isNaN(parseFloat(number))) return null;
 
     return eval(number).toFixed(2);
   };
@@ -33,9 +33,9 @@ function ConvertHandler() {
     const pattern = /[a-zA-Z]+$/;
     let unit = input.match(pattern);
 
-    if (validUnits.includes(unit[0].toLowerCase())) return unit[0].toLowerCase();
+    if (!validUnits.includes(unit[0].toLowerCase())) return null;
 
-    return "invalid unit";
+    return unit[0].toLowerCase();
   };
 
   this.getReturnUnit = function (initUnit) {
@@ -80,7 +80,6 @@ function ConvertHandler() {
     };
 
     result = Math.round(initNum * conversion[initUnit.toLowerCase()] * 10 ** 5) / 10 ** 5;
-    // return initNum * conversion[initUnit];
     return result;
   };
 
