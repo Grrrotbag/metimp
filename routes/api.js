@@ -29,6 +29,9 @@ module.exports = function (app) {
       returnUnit: returnUnit,
       string: toString,
     };
+    if (returnObject === "undefined") {
+      return "error!";
+    }
     console.log(JSON.stringify(returnObject, null, 4));
     res.json({
       initNum: initNum,
