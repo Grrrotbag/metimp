@@ -5,37 +5,56 @@
  *
  *
  */
+function splitIndex (input) {
+  let number = input.match(/[.\d\/]+/g) || ['1'];
+  let unit = input.match(/[a-zA-Z]+/g)[0];
+
+  return [number[0], unit];
+  // return input.indexOf(input.match(/[a-zA-Z]/));
+};
+
+function checkDivisors(fraction) {
+ let numbers = fraction.split('/');
+//  console.log("divisors/numbers: ", numbers)
+
+  if (numbers.length > 2) {
+    return false;
+  }
+  return numbers;
+}
+
 
 function ConvertHandler() {
-  this.splitIndex = (input) => {
-    return input.indexOf(input.match(/[a-zA-Z]/));
-  };
 
   this.getNum = function (input) {
-    let splitAt = this.splitIndex(input);
-    let number = splitAt === 0 ? 1 : input.slice(0, splitAt);
-    let doubleFraction = /(?:.*(?:\b(?:\/)\b)){2}/;
+    // console.log("input: ", input)
 
-    // check for double fractions
-    if (doubleFraction.test(number)) return null;
+    let result = splitIndex(input)[0];
 
-    // check the result
-    if (!eval(number)) return null;
+    if (result === undefined) return result = 1;
+    let nums = checkDivisors(result);
+    if (!checkDivisors) return null
+    // console.log("nums: ", nums)
 
-    // check if not a number
-    if (isNaN(parseFloat(number))) return null;
+    let num1 = nums[0];
+    let num2 = nums[1] || '1';
 
-    return eval(number).toFixed(2);
+
+    if (isNaN(num1) || isNaN(num2)) return null;
+    result = parseFloat(num1) / parseFloat(num2);
+
+    return result;
   };
 
   this.getUnit = function (input) {
-    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg", "GAL", "L", "MI", "KM", "LBS"];
-    const pattern = /[a-zA-Z]+$/;
-    let unit = input.match(pattern);
+    let unit = splitIndex(input)[1];
+    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg", "GAL", "L", "MI", "KM", "LBS", "KG"];
 
-    if (!validUnits.includes(unit[0].toLowerCase())) return null;
+    // console.log("unit: ", unit)
+    if (!validUnits.includes(unit)) return null;
 
-    return unit[0].toLowerCase();
+    if (unit === "L") return unit
+    return unit.toLowerCase();
   };
 
   this.getReturnUnit = function (initUnit) {
@@ -48,7 +67,7 @@ function ConvertHandler() {
       kg: "lbs",
     };
 
-    return conversion[initUnit];
+    return conversion[initUnit.toLowerCase()];
   };
 
   this.spellOutUnit = function (unit) {
@@ -79,15 +98,14 @@ function ConvertHandler() {
       kg: 1 / lbsToKg,
     };
 
-    result = Math.round(initNum * conversion[initUnit.toLowerCase()] * 10 ** 5) / 10 ** 5;
+    result = (initNum * conversion[initUnit.toLowerCase()]).toFixed(5);
     return result;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    if (isNaN(initNum) || isNaN(returnNum) || initUnit === "undefined" || returnUnit === "undefined") {
-      return "invalid input";
-    }
-    return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
+    let convertedUnit = returnUnit.toLowerCase(); 
+
+    return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(convertedUnit)}`;
   };
 }
 

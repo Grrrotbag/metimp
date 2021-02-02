@@ -93,42 +93,42 @@ suite("Unit Tests", function () {
   suite("Function convertHandler.convert(num, unit)", function () {
     test("Gal to L", function (done) {
       let input = [1, "gal"];
-      let expected = 3.78541;
+      let expected = "3.78541";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
 
     test("L to Gal", function (done) {
       let input = [10, "l"];
-      let expected = 2.64172;
+      let expected = "2.64172";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
 
     test("Mi to Km", function (done) {
       let input = [1, "mi"];
-      let expected = 1.60934;
+      let expected = "1.60934";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
 
     test("Km to Mi", function (done) {
       let input = [1, "km"];
-      let expected = 0.62137;
+      let expected = "0.62137";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
 
     test("Lbs to Kg", function (done) {
       let input = [1, "lbs"];
-      let expected = 0.45359;
+      let expected = "0.45359";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
 
     test("Kg to Lbs", function (done) {
       let input = [1, "kg"];
-      let expected = 2.20462;
+      let expected = "2.20462";
       assert.approximately(convertHandler.convert(input[0], input[1]), expected, 0.1);
       done();
     });
