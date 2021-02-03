@@ -5,63 +5,132 @@
  *
  *
  */
+function numberSplitter(input) {
+  let number = input.match(/[.\d\/]+/g)|| ['1'];
+  let string = input.match(/[a-zA-Z]+/g)[0];
+
+  return [number[0], string];
+}
+
+const inputRegex = /[a-z]+|[^a-z]+/gi
 
 function ConvertHandler() {
-  this.splitIndex = (input) => {
-    return input.indexOf(input.match(/[a-zA-Z]/));
-  };
 
   this.getNum = function (input) {
-    let splitAt = this.splitIndex(input);
-    let number = splitAt === 0 ? 1 : input.slice(0, splitAt);
-    let doubleFraction = /(?:.*(?:\b(?:\/)\b)){2}/;
+    let result;
+    result = input.match(inputRegex)[0]
+    
+    // check if no number supplied, insert 1
+    const numRegex = /\d/
+    if (numRegex.test(result) === false) {
+      result = 1
+    }
 
-    // check for double fractions
-    if (doubleFraction.test(number)) return null;
+    // check if fraction, make sure only one slash or fail
+    // divide fraction and return result
+    if (result.toString().includes('/')) {
+      let values = result.toString().split('/')
+      if (values.length != 2) {
+        return null
+      }
+      values[0] = parseFloat(values[0])
+      values[1] = parseFloat(values[1])
+      result = parseFloat((values[0]/values[1]).toFixed(5))
+      }
 
-    // check the result
-    if (!eval(number)) return null;
+    // if not a valid number fail
+    if (isNaN(result)) return null;
 
-    // check if not a number
-    if (isNaN(parseFloat(number))) return null;
-
-    return eval(number).toFixed(2);
+    return result;
   };
 
   this.getUnit = function (input) {
-    const validUnits = ["gal", "l", "mi", "km", "lbs", "kg", "GAL", "L", "MI", "KM", "LBS"];
-    const pattern = /[a-zA-Z]+$/;
-    let unit = input.match(pattern);
+    let result;
+    result = numberSplitter(input)[1].toLowerCase();
 
-    if (!validUnits.includes(unit[0].toLowerCase())) return null;
+    if (!result) {
+      result = input.match(inputRegex[0])
+    }
 
-    return unit[0].toLowerCase();
+    switch (result) {
+      case 'km':
+        return 'km';
+        break;
+      case 'mi':
+        return 'mi';
+        break;
+      case 'lbs':
+        return 'lbs';
+        break;
+      case 'kg':
+        return 'kg';
+        break;
+      case 'l':
+        return 'L';
+        break;
+      case 'gal':
+        return 'gal';
+        break;
+      default:
+        return undefined;
+        break;
+    }
   };
 
   this.getReturnUnit = function (initUnit) {
-    const conversion = {
-      gal: "L",
-      l: "gal",
-      mi: "km",
-      km: "mi",
-      lbs: "kg",
-      kg: "lbs",
-    };
+    let unit = initUnit.toLowerCase();
 
-    return conversion[initUnit];
+    switch (unit) {
+      case 'km':
+        return 'mi';
+        break;
+      case 'mi':
+        return 'km';
+        break;
+      case 'lbs':
+        return 'kg';
+        break;
+      case 'kg':
+        return 'lbs';
+        break;
+      case 'l':
+        return 'gal';
+        break;
+      case 'gal':
+        return 'L';
+        break;
+      default:
+        return undefined;
+        break;
+    }
   };
 
   this.spellOutUnit = function (unit) {
-    const fullUnit = {
-      gal: "gallons",
-      l: "liters",
-      mi: "miles",
-      km: "kilometres",
-      lbs: "pounds",
-      kg: "kilograms",
-    };
+    let name = unit.toLowerCase();
 
-    return fullUnit[unit];
+    switch (name) {
+      case 'km':
+        return 'kilometers';
+        break;
+      case 'mi':
+        return 'miles';
+        break;
+      case 'lbs':
+        return 'pounds';
+        break;
+      case 'kg':
+        return 'kilograms';
+        break;
+      case 'l':
+        return 'liters';
+        break;
+      case 'gal':
+        return 'gallons';
+        break;
+      default:
+        return null;
+        break;
+    }
   };
 
   this.convert = function (initNum, initUnit) {
@@ -84,9 +153,6 @@ function ConvertHandler() {
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    if (isNaN(initNum) || isNaN(returnNum) || initUnit === "undefined" || returnUnit === "undefined") {
-      return "invalid input";
-    }
     return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
   };
 }

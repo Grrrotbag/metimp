@@ -33,8 +33,8 @@ suite("Unit Tests", function () {
     });
 
     test("Fractional Input w/ Decimal", function (done) {
-      let input = "32.3/3l";
-      assert.equal(convertHandler.getNum(input), 10.77);
+      let input = "32.5/2l";
+      assert.equal(convertHandler.getNum(input), 16.25);
       done();
     });
 
@@ -53,10 +53,11 @@ suite("Unit Tests", function () {
 
   suite("Function convertHandler.getUnit(input)", function () {
     test("For Each Valid Unit Inputs", function (done) {
-      let input = ["gal", "l", "mi", "km", "lbs", "kg", "GAL", "L", "MI", "KM", "LBS", "KG"];
-      input.forEach((ele) => {
+      let input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
+      let output = ['gal', 'L', 'mi', 'km', 'lbs', 'kg', 'gal', 'L', 'mi', 'km','lbs', 'kg'];
+      input.forEach((ele, i) => {
         let test = "10" + ele;
-        assert.equal(convertHandler.getUnit(test), ele.toLowerCase());
+        assert.equal(convertHandler.getUnit(test), output[i]);
       });
       done();
     });
@@ -82,7 +83,7 @@ suite("Unit Tests", function () {
   suite("Function convertHandler.spellOutUnit(unit)", function () {
     test("For Each Valid Unit Inputs", function (done) {
       let input = ["gal", "l", "mi", "km", "lbs", "kg"];
-      let expect = ["gallons", "liters", "miles", "kilometres", "pounds", "kilograms"];
+      let expect = ["gallons", "liters", "miles", "kilometers", "pounds", "kilograms"];
       input.forEach(function (ele, i) {
         assert.equal(convertHandler.spellOutUnit(ele), expect[i]);
       });

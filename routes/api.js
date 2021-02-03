@@ -19,21 +19,24 @@ module.exports = function (app) {
     let initNum = convertHandler.getNum(input);
     let initUnit = convertHandler.getUnit(input);
 
-    console.log("initNum", initNum);
-    console.log("initUnit", initUnit);
-    if (!initNum && !initUnit) return res.send("invalid number and unit");
-    if (!initNum) return res.send("invalid number");
-    if (!initUnit) return res.send("invalid unit");
+    if (!initNum && !initUnit) {
+      return res.send("invalid number and unit");
+    } else if (!initNum) {
+      return res.send("invalid number");
+    } else if (!initUnit) {
+      return res.send("invalid unit");
+    }
 
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-    res.json({
+    let obj = {
       initNum: initNum,
       initUnit: initUnit,
       returnNum: returnNum,
       returnUnit: returnUnit,
-      string: toString,
-    });
+      string: toString
+      }
+      res.json(obj);
   });
 };
