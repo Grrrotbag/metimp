@@ -6,37 +6,33 @@
  *
  */
 function numberSplitter(input) {
-  let number = input.match(/[.\d\/]+/g)|| ['1'];
+  let number = input.match(/[.\d\/]+/g) || ["1"];
   let string = input.match(/[a-zA-Z]+/g)[0];
 
   return [number[0], string];
 }
 
-const inputRegex = /[a-z]+|[^a-z]+/gi
-
 function ConvertHandler() {
-
   this.getNum = function (input) {
     let result;
-    result = input.match(inputRegex)[0]
-    
+    result = numberSplitter(input)[0];
+
     // check if no number supplied, insert 1
-    const numRegex = /\d/
+    const numRegex = /\d/;
     if (numRegex.test(result) === false) {
-      result = 1
+      result = 1;
     }
 
     // check if fraction, make sure only one slash or fail
-    // divide fraction and return result
-    if (result.toString().includes('/')) {
-      let values = result.toString().split('/')
+    if (result.toString().includes("/")) {
+      let values = result.toString().split("/");
       if (values.length != 2) {
-        return null
+        return null;
       }
-      values[0] = parseFloat(values[0])
-      values[1] = parseFloat(values[1])
-      result = parseFloat((values[0]/values[1]).toFixed(5))
-      }
+      values[0] = parseFloat(values[0]);
+      values[1] = parseFloat(values[1]);
+      result = parseFloat((values[0] / values[1]).toFixed(5));
+    }
 
     // if not a valid number fail
     if (isNaN(result)) return null;
@@ -49,30 +45,30 @@ function ConvertHandler() {
     result = numberSplitter(input)[1].toLowerCase();
 
     if (!result) {
-      result = input.match(inputRegex[0])
+      result = numberSplitter(input)[0];
     }
 
     switch (result) {
-      case 'km':
-        return 'km';
+      case "km":
+        return "km";
         break;
-      case 'mi':
-        return 'mi';
+      case "mi":
+        return "mi";
         break;
-      case 'lbs':
-        return 'lbs';
+      case "lbs":
+        return "lbs";
         break;
-      case 'kg':
-        return 'kg';
+      case "kg":
+        return "kg";
         break;
-      case 'l':
-        return 'L';
+      case "l":
+        return "L";
         break;
-      case 'gal':
-        return 'gal';
+      case "gal":
+        return "gal";
         break;
       default:
-        return undefined;
+        return null;
         break;
     }
   };
@@ -81,26 +77,26 @@ function ConvertHandler() {
     let unit = initUnit.toLowerCase();
 
     switch (unit) {
-      case 'km':
-        return 'mi';
+      case "km":
+        return "mi";
         break;
-      case 'mi':
-        return 'km';
+      case "mi":
+        return "km";
         break;
-      case 'lbs':
-        return 'kg';
+      case "lbs":
+        return "kg";
         break;
-      case 'kg':
-        return 'lbs';
+      case "kg":
+        return "lbs";
         break;
-      case 'l':
-        return 'gal';
+      case "l":
+        return "gal";
         break;
-      case 'gal':
-        return 'L';
+      case "gal":
+        return "L";
         break;
       default:
-        return undefined;
+        return null;
         break;
     }
   };
@@ -109,23 +105,23 @@ function ConvertHandler() {
     let name = unit.toLowerCase();
 
     switch (name) {
-      case 'km':
-        return 'kilometers';
+      case "km":
+        return "kilometers";
         break;
-      case 'mi':
-        return 'miles';
+      case "mi":
+        return "miles";
         break;
-      case 'lbs':
-        return 'pounds';
+      case "lbs":
+        return "pounds";
         break;
-      case 'kg':
-        return 'kilograms';
+      case "kg":
+        return "kilograms";
         break;
-      case 'l':
-        return 'liters';
+      case "l":
+        return "liters";
         break;
-      case 'gal':
-        return 'gallons';
+      case "gal":
+        return "gallons";
         break;
       default:
         return null;
@@ -148,7 +144,8 @@ function ConvertHandler() {
       kg: 1 / lbsToKg,
     };
 
-    result = Math.round(initNum * conversion[initUnit.toLowerCase()] * 10 ** 5) / 10 ** 5;
+    result = parseFloat(initNum * conversion[initUnit.toLowerCase()].toFixed(5));
+
     return result;
   };
 
